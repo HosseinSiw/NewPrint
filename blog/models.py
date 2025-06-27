@@ -15,6 +15,9 @@ def section_image_upload_path(instance, filename):
     base_filename, file_extension = os.path.splitext(filename)
     return f'sections/{slugify(instance.title)}/{slugify(base_filename)}{file_extension}'
 
+def banners_image_upload_path(instance, filename):
+    base_filename, file_extenstion = os.path.splitext(filename)
+    return f'blogs/{slugify(instance.title)}/{slugify(base_filename)}{file_extenstion}'
 
 class Section(models.Model):
     class ProgrammingLanguage(models.TextChoices):
@@ -43,7 +46,7 @@ class Section(models.Model):
         blank=True,
         null=True,
         help_text="Optional image for the section",
-        validators=[FileExtensionValidator(['jpg', 'jpeg', 'png', 'gif'])]
+        validators=[FileExtensionValidator(['jpg', 'jpeg', 'png',])]
     )
 
     code_snippet = models.TextField(
@@ -108,7 +111,14 @@ class Blog(models.Model):
         validators=[MinLengthValidator(10)],
         help_text="Title of the blog post (10-200 characters)"
     )
-
+    banner = models.ImageField(
+        upload_to=banners_image_upload_path,
+        blank=False,
+        null=False,
+        help_text="The main banner for the post",
+        validators=[FileExtensionValidator(['jpg', 'jpeg', 'png',])],
+        default='temp/blog_image_default.png',
+                    )
     slug = models.SlugField(
         max_length=250,
         unique_for_date='publish_date',
