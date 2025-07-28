@@ -1,6 +1,1 @@
-1. Remove the Our Experienced Team part of Home and About page.
-2. add a Blog management system (already ready)
-3. Add a Papers management system (app)
-4. Add a books management system
-5. Add a projects management system (commenting for only co-workers) (login)
-6. Add a users management system
+Nothing here yet
